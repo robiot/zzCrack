@@ -1,9 +1,18 @@
-# zzCrack Version 2 Released!!!
+# zzCrack v2
 Ever forgot your password to a zipfile or you just want to crack the password for some reason, Then zzCrack is what you need
 
 This is a advanced tool to crack passwords on zipfiles by wordlists or bruteforce.
 
 You can also save the current state and return from it anytime
+
+Name           | zzCrack
+:------------- | :----------------------------------------------------------------------------------------------
+Python Version | python3
+Languages      | Python
+Author         | [@robi0t](https://github.com/robi0t)
+Project GitHub | <https://github.com/robi0t/zzCrack>
+License        | [GNU General Public License v3.0](https://github.com/robi0t/zzCrack/blob/main/LICENSE)
+
 
 ## Usage:
 Run main.py with either arguments(more advanced) or without arguments(easy)
