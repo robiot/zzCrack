@@ -4,7 +4,7 @@
 #    https://github.com/robi0t        
 #                                     
 #             LICENSE:
-#	GNU General Public License v3.0
+#GNU General Public License v3.0
 #######################################
 #If tou experience any error please let me know
 
