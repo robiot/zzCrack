@@ -3,7 +3,8 @@
 #         made by robi0t              
 #    https://github.com/robi0t        
 #                                     
-#          LICENSE: MIT               
+#             LICENSE:
+#	GNU General Public License v3.0
 #######################################
 #If tou experience any error please let me know
 
