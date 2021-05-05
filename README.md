@@ -11,7 +11,7 @@ Python Version | python3
 Languages      | Python
 Author         | [@robi0t](https://github.com/robi0t)
 Project GitHub | <https://github.com/robi0t/zzCrack>
-License        | [GNU General Public License v3.0](https://github.com/robi0t/zzCrack/blob/main/LICENSE)
+License        | [MIT License](https://github.com/robi0t/zzCrack/blob/main/LICENSE)
 
 
 ## Usage:
