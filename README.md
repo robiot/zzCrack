@@ -3,7 +3,7 @@ Ever forgot your password to a zipfile or you just want to crack the password fo
 
 This is a advanced tool to crack passwords on zipfiles by wordlists or bruteforce.
 
-You can also save the current state and return from it anytime
+You can also save the current state in wordlist and return from it anytime
 
 Name           | zzCrack
 :------------- | :----------------------------------------------------------------------------------------------
@@ -22,14 +22,16 @@ Argument Help: ```python zipcrack-v2.py --help```
 ### Exampel Usage:
 #### Without arguments:
 ```
-  _______        _____                _
- |___  (_)      / ____|              | |
-    / / _ _ __ | |     _ __ __ _  ___| | __
-   / / | | '_ \| |    | '__/ _` |/ __| |/ /
-  / /__| | |_) | |____| | | (_| | (__|   <
- /_____|_| .__/ \_____|_|  \__,_|\___|_|\_|
-         | |
-         |_|
+▒███████▒▒███████▒ ▄████▄   ██▀███   ▄▄▄       ▄████▄   ██ ▄█▀
+▒ ▒ ▒ ▄▀░▒ ▒ ▒ ▄▀░▒██▀ ▀█  ▓██ ▒ ██▒▒████▄    ▒██▀ ▀█   ██▄█▒ 
+░ ▒ ▄▀▒░ ░ ▒ ▄▀▒░ ▒▓█    ▄ ▓██ ░▄█ ▒▒██  ▀█▄  ▒▓█    ▄ ▓███▄░ 
+  ▄▀▒   ░  ▄▀▒   ░▒▓▓▄ ▄██▒▒██▀▀█▄  ░██▄▄▄▄██ ▒▓▓▄ ▄██▒▓██ █▄ 
+▒███████▒▒███████▒▒ ▓███▀ ░░██▓ ▒██▒ ▓█   ▓██▒▒ ▓███▀ ░▒██▒ █▄
+░▒▒ ▓░▒░▒░▒▒ ▓░▒░▒░ ░▒ ▒  ░░ ▒▓ ░▒▓░ ▒▒   ▓▒█░░ ░▒ ▒  ░▒ ▒▒ ▓▒
+░░▒ ▒ ░ ▒░░▒ ▒ ░ ▒  ░  ▒     ░▒ ░ ▒░  ▒   ▒▒ ░  ░  ▒   ░ ░▒ ▒░
+░ ░ ░ ░ ░░ ░ ░ ░ ░░          ░░   ░   ░   ▒   ░        ░ ░░ ░ 
+  ░ ░      ░ ░    ░ ░         ░           ░  ░░ ░      ░  ░   
+░        ░        ░                           ░               
 
 https://github.com/robi0t
 
@@ -52,11 +54,11 @@ Do you want to output everything (slower) or not (faster)  y/n > y
 ```
 
 #### With arguments:
-```python main.py -z test.zip -w rockyou.txt --stream```
+```python zz.py -f test.zip -w rockyou.txt --stream```
 
-```python main.py -z test.zip -b -c 0 -m 4 --stream```
+```python zz.py -f test.zip -b -c 0+2 -l 4 --stream```
 
-```python main.py --restore 0```
+```python zz.py --restore 0```
 
 **--stream prints everything it tries, it makes the process slower**
 
