@@ -44,6 +44,15 @@ class main():
     def signal_handler(self, signal, frame):
         self.done=True
 
+    #############
+    # Main crack
+    #############
+    def crack(self, z, content, word, tries, stream):
+        if stream: print(self.tries_print(tries,word))
+        z.setpassword(word.encode('utf8'))
+        z.read(content[0])
+        self.passFound = True
+        print(self.passFound_print(tries,word))
 
     #############
     # Wordlist
@@ -56,13 +65,8 @@ class main():
                     confirm = input("\nAre you sure you want to stop (y/n) > ").lower()
                     if confirm == "y": self.save_state(archive_dir, wordlist_inp, word, stream, wordlist); return
                     self.done = False
-
                 tries += 1
-                if stream: print(self.tries_print(tries,word))
-                z.setpassword(word.encode('utf8'))
-                z.read(content[0])
-                self.passFound = True
-                print(self.passFound_print(tries,word))
+                self.crack(z, content, word, tries, stream)
                 return
             except:
                 pass
@@ -119,13 +123,8 @@ class main():
                     confirm = input("\nAre you sure you want to stop (y/n) > ").lower()
                     if confirm == "y": return
                     self.done = False
-
                 tries += 1
-                if stream: print(self.tries_print(tries,word))
-                z.setpassword(word.encode('utf8'))
-                z.read(content[0])
-                self.passFound = True
-                print(self.passFound_print(tries,word))
+                self.crack(z, content, word, tries, stream)
                 return
             except:
                 pass
