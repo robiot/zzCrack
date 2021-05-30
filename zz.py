@@ -92,15 +92,16 @@ class main():
     # Bruteforce
     #############
     def generate_charlist(self, charset):
-        a = string.ascii_lowercase
-        b = string.ascii_uppercase
-        c = string.digits
-        d = string.punctuation
-        e = string.printable
+        chars = [
+            string.ascii_lowercase, # 0
+            string.ascii_uppercase, # 1
+            string.digits,          # 2
+            string.punctuation,     # 3
+            string.printable        # 4
+        ]
 
         allowed_chars = set("01234+")
-        _charset = "".join([c for c in charset if c in allowed_chars])
-        _charset = _charset.replace("0","a").replace("1","b").replace("2","c").replace("3","d").replace("4","e")
+        charlist = ''.join(set(''.join([chars[int(c)] for c in charset.split('+') if c in allowed_chars])))
         try:charlist = eval(_charset) #todo: add safer way to do this, add custom charlist?       
         except Exception as ex: print("Invalid charset"); sys.exit(1)
         return charlist
