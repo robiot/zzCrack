@@ -13,11 +13,17 @@ Author         | [@robi0t](https://github.com/robi0t)
 Project GitHub | <https://github.com/robi0t/zzCrack>
 License        | [MIT License](https://github.com/robi0t/zzCrack/blob/main/LICENSE)
 
+## Download:
+You can download it as a zipfile or however you want
+Then cd into the folder where zz.py is located and run
+```
+pip install -r requirements.txt
+```
 
 ## Usage:
 Run main.py with either arguments(more advanced) or without arguments(easy)
 
-Argument Help: ```python zipcrack-v2.py --help```
+Argument Help: ```zz.py --help```
 
 ### Exampel Usage:
 #### Without arguments:
