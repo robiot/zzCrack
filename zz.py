@@ -49,6 +49,7 @@ class main():
     # Wordlist
     #############
     def wlist_crack(self, tries, wordlist, z, stream, archive_dir, wordlist_inp):
+        content = z.namelist()
         for word in wordlist:
             try:
                 if self.done==True:
@@ -56,7 +57,6 @@ class main():
                     if confirm == "y": self.save_state(archive_dir, wordlist_inp, word, stream, wordlist); return
                     self.done = False
 
-                content = z.namelist()
                 tries += 1
                 if stream: print(self.tries_print(tries,word))
                 z.setpassword(word.encode('utf8'))
@@ -112,6 +112,7 @@ class main():
             for i in range(1, max_lenght + 1)))
             
     def bruteforce_crack(self, tries, brutelist, z, stream, charset, max_lenght):
+        content = z.namelist()
         for word in self.memsafe_generate_bruteforce_list(charset, max_lenght):
             try:
                 if self.done == True:
@@ -119,7 +120,6 @@ class main():
                     if confirm == "y": return
                     self.done = False
 
-                content = z.namelist()
                 tries += 1
                 if stream: print(self.tries_print(tries,word))
                 z.setpassword(word.encode('utf8'))
