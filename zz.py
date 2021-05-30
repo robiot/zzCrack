@@ -93,17 +93,16 @@ class main():
     #############
     def generate_charlist(self, charset):
         chars = [
-            string.ascii_lowercase, # 0
-            string.ascii_uppercase, # 1
+            string.ascii_lowercase,  # 0
+            string.ascii_uppercase,  # 1
             string.digits,          # 2
             string.punctuation,     # 3
             string.printable        # 4
         ]
 
         allowed_chars = set("01234+")
-        charlist = ''.join(set(''.join([chars[int(c)] for c in charset.split('+') if c in allowed_chars])))
-        try:charlist = eval(_charset) #todo: add safer way to do this, add custom charlist?       
-        except Exception as ex: print("Invalid charset"); sys.exit(1)
+        charlist = ''.join(''.join([chars[int(c)] for c in charset.split('+') if c in allowed_chars]))
+        if charlist == "": print("Invalid charset"); sys.exit(1)
         return charlist
 
     def memsafe_generate_bruteforce_list(self, charset, max_lenght):
