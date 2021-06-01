@@ -1,7 +1,7 @@
 #######################################
 #             zzCrack                  
-#         made by robi0t              
-#    https://github.com/robi0t        
+#         made by robiot              
+#    https://github.com/robiot
 #                                     
 #             LICENSE:
 #           MIT License
