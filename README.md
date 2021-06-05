@@ -9,9 +9,9 @@ Name           | zzCrack
 :------------- | :----------------------------------------------------------------------------------------------
 Python Version | python3
 Languages      | Python
-Author         | [@robi0t](https://github.com/robi0t)
-Project GitHub | <https://github.com/robi0t/zzCrack>
-License        | [MIT License](https://github.com/robi0t/zzCrack/blob/main/LICENSE)
+Author         | [@robiot](https://github.com/robiit)
+Project GitHub | <https://github.com/robiot/zzCrack>
+License        | [MIT License](https://github.com/robiot/zzCrack/blob/main/LICENSE)
 
 ## Download:
 You can download it as a zipfile or however you want
