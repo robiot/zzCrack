@@ -1,15 +1,14 @@
 #######################################
 #             zzCrack                  
-#         made by robiot              
-#    https://github.com/robiot
+#         made by robi0t              
+#    https://github.com/robi0t        
 #                                     
 #             LICENSE:
 #           MIT License
 #######################################
 #If you experience any error please let me know
-#version 2.1
+#version 2.2
 
-# colorama
 from colorama import Fore,Back,Style
 from itertools import chain,product
 from optparse import OptionParser
@@ -44,15 +43,6 @@ class main():
     def signal_handler(self, signal, frame):
         self.done=True
 
-    #############
-    # Main crack
-    #############
-    def crack(self, z, content, word, tries, stream):
-        if stream: print(self.tries_print(tries,word))
-        z.setpassword(word.encode('utf8'))
-        z.read(content[0])
-        self.passFound = True
-        print(self.passFound_print(tries,word))
 
     #############
     # Wordlist
@@ -65,8 +55,13 @@ class main():
                     confirm = input("\nAre you sure you want to stop (y/n) > ").lower()
                     if confirm == "y": self.save_state(archive_dir, wordlist_inp, word, stream, wordlist); return
                     self.done = False
+
                 tries += 1
-                self.crack(z, content, word, tries, stream)
+                if stream: print(self.tries_print(tries,word))
+                z.setpassword(word.encode('utf8', errors='ignore'))
+                z.read(content[0])
+                self.passFound = True
+                print(self.passFound_print(tries,word))
                 return
             except:
                 pass
@@ -78,7 +73,7 @@ class main():
             except Exception as ex: print(ex); sys.exit(1)
 
             print("Loading Wordlist, Please wait")
-            _wordlist = open(wordlist_inp, 'r', encoding="utf8")
+            _wordlist = open(wordlist_inp, 'r', encoding="utf8", errors='ignore')
             wordlist = _wordlist.read().splitlines()
             _wordlist.close()
             if resume_index != None:
@@ -123,8 +118,13 @@ class main():
                     confirm = input("\nAre you sure you want to stop (y/n) > ").lower()
                     if confirm == "y": return
                     self.done = False
+
                 tries += 1
-                self.crack(z, content, word, tries, stream)
+                if stream: print(self.tries_print(tries,word))
+                z.setpassword(word.encode('utf8', errors='ignore'))
+                z.read(content[0])
+                self.passFound = True
+                print(self.passFound_print(tries,word))
                 return
             except:
                 pass
