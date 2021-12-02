@@ -5,14 +5,6 @@ This is a advanced tool to crack passwords on zipfiles by wordlists or bruteforc
 
 You can also save the current state in wordlist and return from it anytime
 
-Name           | zzCrack
-:------------- | :----------------------------------------------------------------------------------------------
-Python Version | python3
-Languages      | Python
-Author         | [@robiot](https://github.com/robiit)
-Project GitHub | <https://github.com/robiot/zzCrack>
-License        | [MIT License](https://github.com/robiot/zzCrack/blob/main/LICENSE)
-
 ## Download:
 You can download it as a zipfile or however you want
 Then cd into the folder where zz.py is located and run
