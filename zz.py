@@ -9,7 +9,7 @@
 #If you experience any error please let me know
 #version 2.2
 
-from colorama import Fore,Back,Style
+from colorama import Fore,Back,Style,init
 from itertools import chain,product
 from optparse import OptionParser
 from zipfile import ZipFile
@@ -305,4 +305,5 @@ if __name__ == "__main__":
                     help="Shows a list of all restore files found")
     (options, args) = parser.parse_args()
 
+    init()    
     main().main()
