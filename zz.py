@@ -13,6 +13,7 @@ from colorama import Fore,Back,Style,init
 from itertools import chain,product
 from optparse import OptionParser
 from zipfile import ZipFile
+from pyzipper import AESZipFile
 import string
 import signal
 import time
@@ -69,7 +70,7 @@ class main():
     def wlist_crack_entry(self, archive_dir, wordlist_inp, showoutput_b, resume_index):
         tries = 0
         try:
-            try: _archive = ZipFile(archive_dir, "r")
+            try: _archive = AESZipFile(archive_dir, "r")
             except Exception as ex: print(ex); sys.exit(1)
 
             print("Loading Wordlist, Please wait")
@@ -132,7 +133,7 @@ class main():
     def bruteforce_crack_entry(self, archive_dir, charset, max_letters, showoutput_b, resume_index):
         tries = 0
         try:
-            try: _archive = ZipFile(archive_dir, "r")
+            try: _archive = AESZipFile(archive_dir, "r")
             except Exception as ex: print(ex); sys.exit(1)
             print("Started...")
             self.bruteforce_crack(tries,None,_archive,showoutput_b, charset, max_letters)
