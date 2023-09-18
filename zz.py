@@ -7,7 +7,7 @@
 #           MIT License
 #######################################
 #If you experience any error please let me know
-#version 2.2
+#version 2.3
 
 from colorama import Fore,Back,Style,init
 from itertools import chain,product
@@ -40,6 +40,10 @@ class main():
         self.saves_dir = os.path.dirname(os.path.abspath(__file__))+"/stateSaves"
         self.passFound = False
         self.done = False
+        if options.use_pyzipper:
+            self.zip_func = AESZipFile
+        else:
+            self.zip_func = ZipFile
     
     def signal_handler(self, signal, frame):
         self.done=True
@@ -70,7 +74,7 @@ class main():
     def wlist_crack_entry(self, archive_dir, wordlist_inp, showoutput_b, resume_index):
         tries = 0
         try:
-            try: _archive = AESZipFile(archive_dir, "r")
+            try: _archive = self.zip_func(archive_dir, "r")
             except Exception as ex: print(ex); sys.exit(1)
 
             print("Loading Wordlist, Please wait")
@@ -133,7 +137,7 @@ class main():
     def bruteforce_crack_entry(self, archive_dir, charset, max_letters, showoutput_b, resume_index):
         tries = 0
         try:
-            try: _archive = AESZipFile(archive_dir, "r")
+            try: _archive = self.zip_func(archive_dir, "r")
             except Exception as ex: print(ex); sys.exit(1)
             print("Started...")
             self.bruteforce_crack(tries,None,_archive,showoutput_b, charset, max_letters)
@@ -304,6 +308,8 @@ if __name__ == "__main__":
     parser.add_option("--rl",
                     action="store_true", dest="reslist", default=False,
                     help="Shows a list of all restore files found")
+    parser.add_option("--use-pyzipper", dest="use_pyzipper", default=False,
+                    help="Use pyzipper instead of zipfile (AES)")
     (options, args) = parser.parse_args()
 
     init()    
