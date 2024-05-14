@@ -7,7 +7,7 @@
 #           MIT License
 #######################################
 #If you experience any error please let me know
-#version 2.3
+#version 2.3 
 
 from colorama import Fore,Back,Style,init
 from itertools import chain,product
@@ -131,38 +131,39 @@ class main():
         if charlist == "": print("Invalid charset"); sys.exit(1)
         return charlist
 
-    def memsafe_generate_bruteforce_list(self, charset, max_length):
+    def memsafe_generate_bruteforce_list(self, charset, min_length, max_length):
         charlist = self.generate_charlist(charset)
         return (''.join(candidate)
             for candidate in chain.from_iterable(product(charlist, repeat=i)
-            for i in range(1, max_length + 1)))
+            for i in range(min_length, max_length + 1)))
             
-    def bruteforce_crack(self, tries, brutelist, z, stream, charset, max_length):
+    def bruteforce_crack(self, tries, brutelist, z, stream, charset, min_length, max_length):
         content = z.namelist()
-        for word in self.memsafe_generate_bruteforce_list(charset, max_length):
+        start_time = time.time()
+        for word in self.memsafe_generate_bruteforce_list(charset, min_length, max_length):
             try:
                 if self.done == True:
                     confirm = input("\nAre you sure you want to stop (y/n) > ").lower()
                     if confirm == "y": return
                     self.done = False
-
                 tries += 1
                 if stream: print(self.tries_print(tries,word))
+
                 z.setpassword(word.encode('utf8', errors='ignore'))
                 z.read(content[0])
                 self.passFound = True
-                print(self.passFound_print(tries,word))
+                print(self.passFound_print(tries,word,start_time))
                 return
             except:
                 pass
 
-    def bruteforce_crack_entry(self, archive_dir, charset, max_letters, showoutput_b, resume_index):
+    def bruteforce_crack_entry(self, archive_dir, charset, min_letters, max_letters, showoutput_b, resume_index):
         tries = 0
         try:
             try: _archive = self.zip_func(archive_dir, "r")
             except Exception as ex: print(ex); sys.exit(1)
             print("Started...")
-            self.bruteforce_crack(tries,None,_archive,showoutput_b, charset, max_letters)
+            self.bruteforce_crack(tries,None,_archive,showoutput_b, charset, min_letters, max_letters)
         except IOError:
             print("Zipfile Doesn't Exist")
             sys.exit(1)
@@ -230,18 +231,25 @@ class main():
 
         elif attack_type == "0":
             charset = input('\n[+] Which characters to use in the attack (combine to use multiple, separated by +)\n 0: Only small letters\n 1: Only big letters\n 2: Only numbers\n 3: Only symbols\n 4: Everything\n> ')
+            
             try:
-                max_letters = int(input("\n[-+] Max length > "))
-                if max_letters < 0:
-                    print("The given number is not a valid Positive number")
-                    sys.exit(1)
+                min_letters = int(input("\n[-+] Min length > "))
+                max_letters = int(input("\n[-+] Max length > "))                
             except:
                 print("The input given is not a valid Integer")
                 sys.exit(1)
+            
+            if min_letters < 1:
+                print("The given min length must be a positive number")
+                sys.exit(1)
+            if min_letters > max_letters + 1:
+                print("The given max length must not be less than the min length")
+                sys.exit(1)
+
             showOutPut = input("\nDo you want to output everything (slower) or not (faster)  y/n > ")
             if showOutPut.lower() == "y": showoutput_b = True
             else: showoutput_b = False
-            self.bruteforce_crack_entry(archive_dir, charset, max_letters, showoutput_b, None)
+            self.bruteforce_crack_entry(archive_dir, charset, min_letters, max_letters, showoutput_b, None)
         else:
             print("Invalid Input")
         sys.exit(1)
@@ -264,20 +272,34 @@ class main():
                 print("No Charlist Given")
                 sys.exit(1)
 
+            min_letters_inp = options.minlength
+            if min_letters_inp == None:
+                print("No MinLength Given")
+                sys.exit(1)
+            try:
+                min_letters = int(min_letters_inp)
+            except:
+                print("The given MinLength is not a valid Integer")
+                sys.exit(1)
+            if min_letters < 1:
+                print("The given MinLength is not a valid Positive number")
+                sys.exit(1)
+            
             max_letters_inp = options.maxlength
             if max_letters_inp == None:
                 print("No MaxLength Given")
+                sys.exit(1)
             try:
                 max_letters = int(max_letters_inp)
-                if max_letters < 0:
-                    print("The given MaxLength is not a valid Positive number")
-                    sys.exit(1)
             except:
                 print("The given MaxLength is not a valid Integer")
                 sys.exit(1)
+            if min_letters > max_letters + 1:
+                print("The given MaxLength is not greater than or equal to the MinLength")
+                sys.exit(1)
 
             showoutput_b = options.showoutput
-            self.bruteforce_crack_entry(archive_dir, charset, max_letters, showoutput_b, None)
+            self.bruteforce_crack_entry(archive_dir, charset, min_letters, max_letters, showoutput_b, None)
 
         elif options.restore != None:
             self.restore()
@@ -321,6 +343,8 @@ if __name__ == "__main__":
                     help="(Required for Bruteforce)\nWhich characters to use in the Bruteforce attack (combine to use multiple, separated by +) 0: Only small letters | 1: Only big letters | 2: Only numbers | 3: Only signs | 4: Everything", metavar=" ") #byt
     parser.add_option("-l", dest="maxlength",
                     help="The max length for the bruteforce passwords (Required for Bruteforce)", metavar=" ")
+    parser.add_option("-m", dest="minlength",
+                    help="The min length for the bruteforce passwords (Required for Bruteforce)", metavar=" ")
     parser.add_option("-s", "--stream",
                     action="store_true", dest="showoutput", default=False,
                     help="Stream tried passwords (slower)")
