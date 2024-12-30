@@ -139,6 +139,7 @@ class main():
             
     def bruteforce_crack(self, tries, brutelist, z, stream, charset, max_length):
         content = z.namelist()
+        start_time = time.time()
         for word in self.memsafe_generate_bruteforce_list(charset, max_length):
             try:
                 if self.done == True:
@@ -151,9 +152,9 @@ class main():
                 z.setpassword(word.encode('utf8', errors='ignore'))
                 z.read(content[0])
                 self.passFound = True
-                print(self.passFound_print(tries,word))
+                print(self.passFound_print(tries,word,start_time))
                 return
-            except:
+            except Exception as ex:
                 pass
 
     def bruteforce_crack_entry(self, archive_dir, charset, max_letters, showoutput_b, resume_index):
@@ -331,7 +332,7 @@ if __name__ == "__main__":
                     action="store_true", dest="reslist", default=False,
                     help="Shows a list of all restore files found")
     parser.add_option("--use-pyzipper", dest="use_pyzipper", default=False,
-                    help="Use pyzipper instead of zipfile (AES)")
+                    help="Use pyzipper instead of zipfile to deal with AES encryption")
     (options, args) = parser.parse_args()
 
     init()    
