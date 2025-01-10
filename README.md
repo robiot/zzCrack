@@ -1,7 +1,7 @@
 # zzCrack v2
 Ever forgot your password to a zipfile or you just want to crack the password for some reason, Then zzCrack is what you need
 
-This is a advanced tool to crack passwords on zipfiles by wordlists or bruteforce.
+This is an advanced tool to crack passwords on zip-files by wordlists or bruteforce.
 
 You can also save the current state in wordlist and return from it anytime
 
@@ -52,13 +52,17 @@ Do you want to output everything (slower) or not (faster)  y/n > y
 ```
 
 #### With arguments:
-```python zz.py -f test.zip -w rockyou.txt --stream```
+```python zz.py -f test.zip -w rockyou.txt```
+
+`--stream` will print everything it tries, but it makes the process slower
 
 ```python zz.py -f test.zip -b -c 0+2 -l 4 --stream```
 
 ```python zz.py --restore 0```
 
-**--stream prints everything it tries, it makes the process slower**
+`-p` will set the number of processes used to crack the password
+
+```python zz.py -f test.zip -b -c 0+2 -l 4 -p 16```
 
 
-### If you experience any error please post a issue
+### If you experience any error please post an issue
